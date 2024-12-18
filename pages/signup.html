@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - Task Management</title>
+    <!-- Root Styles -->
+    <link rel="stylesheet" href="../assets/styles/root.css" />
+    <!-- Login Styles -->
+    <link rel="stylesheet" href="../assets/styles/signup.css" />
+    <!-- cdn-libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+      integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+      integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="../assets/scripts/toast.js"></script>
+  </head>
+  <body>
+    <div class="signup-container">
+      <!-- Left Section (Welcome Text) -->
+      <div class="signup-left">
+        <h1>Join Us Today!</h1>
+        <p>Create your account and start organizing your tasks seamlessly.</p>
+      </div>
+
+      <!-- Right Section (Signup Form) -->
+      <div class="signup-right">
+        <form class="signup-form">
+          <h2>Sign Up</h2>
+          <div class="input-group">
+            <label for="name">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input
+              type="password"
+              id="confirm-password"
+              placeholder="Confirm your password"
+              required
+            />
+          </div>
+          <button type="submit" class="signup-btn">Sign Up</button>
+          <p class="login-link">
+            Already have an account? <a href="./login.html">Login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document
+        .querySelector(".signup-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Mock form validation (just for example)
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirm-password").value;
+
+          if (!name || !email || !password || !confirmPassword) {
+            toastr.error("All fields are required!", "Validation Error");
+            return;
+          }
+
+          if (password !== confirmPassword) {
+            toastr.error("Passwords do not match!", "Error");
+            return;
+          }
+
+          // Show success toast
+          toastr.success("Account created successfully!", "Welcome");
+
+          // Redirect (mock example)
+          setTimeout(() => {
+            window.location.href = "./login.html";
+          }, 2000);
+        });
+    </script>
+  </body>
+</html>
