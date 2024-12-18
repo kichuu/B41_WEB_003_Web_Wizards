@@ -107,7 +107,7 @@ A simple task management system built using Node.js, Express, MongoDB, and JWT a
 ### **User Routes**
 
 #### **Register a User**
-- **POST** `/api/users`
+- **POST** `/api/auth/register`
 - **Request Body:**
   ```json
   {
@@ -118,7 +118,7 @@ A simple task management system built using Node.js, Express, MongoDB, and JWT a
   ```
 
 #### **Login a User**
-- **POST** `/api/users/login`
+- **POST** `/api/auth/login`
 - **Request Body:**
   ```json
   {
