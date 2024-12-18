@@ -1,0 +1,42 @@
+/* root.css */
+
+/* Define the root variables */
+:root {
+  /* Colors */
+  --primary-color: #00a9ff;
+  --primary-hover: #1e88e5;
+  --secondary-color: #ff5722;
+
+  --background-main: #121212;
+  --background-secondary: #1e1e1e;
+  --background-card: #1e1e1e;
+
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-heading: #ffffff;
+
+  /* Input Fields */
+  --input-background: #333333;
+  --input-border: #444444;
+  --input-focus-border: #00a9ff;
+
+  /* Toast Notifications */
+  --toast-background: #ff5722;
+  --toast-text: #ffffff;
+
+  /* Typography */
+  --font-primary: "Roboto", sans-serif;
+  --font-secondary: "Poppins", sans-serif;
+
+  /* Spacing */
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+
+  /* Border Radius */
+  --border-radius: 6px;
+
+  /* Shadows */
+  --shadow-small: 0 2px 5px rgba(0, 0, 0, 0.2);
+  --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.4);
+}

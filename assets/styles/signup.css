@@ -1,0 +1,121 @@
+/* signup.css */
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  background-color: var(--background-main);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.signup-container {
+  display: flex;
+  width: 90%;
+  max-width: 1000px;
+  background-color: var(--background-secondary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden;
+}
+
+/* Left Section */
+.signup-left {
+  flex: 1;
+  background-color: var(--primary-color);
+  color: var(--text-heading);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-large);
+  text-align: center;
+}
+
+.signup-left h1 {
+  font-family: var(--font-secondary);
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-medium);
+}
+
+.signup-left p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* Right Section */
+.signup-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--spacing-large);
+}
+
+.signup-form h2 {
+  font-family: var(--font-secondary);
+  color: var(--text-heading);
+  font-size: 2rem;
+  margin-bottom: var(--spacing-medium);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing-medium);
+}
+
+.input-group label {
+  margin-bottom: var(--spacing-small);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.input-group input {
+  padding: var(--spacing-small);
+  border: 1px solid var(--input-border);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  background-color: var(--background-main);
+  color: var(--text-primary);
+  transition: border 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.signup-btn {
+  background-color: var(--primary-color);
+  color: var(--text-heading);
+  padding: var(--spacing-medium);
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.signup-btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-3px);
+}
+
+.login-link {
+  margin-top: var(--spacing-medium);
+  text-align: center;
+}
+
+.login-link a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-link a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
