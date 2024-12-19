@@ -1,112 +1,130 @@
-async function fetchTasks() {
-    try {
-        const response = await fetch("https://task-master-c3df1-default-rtdb.firebaseio.com/tasks.json");
-        const data = await response.json();
-
-        if (data) {
-            populateTasks(data);
-        }
-    } catch (error) {
-        console.error("Error fetching tasks:", error);
-    }
+// Retrieve tasks from localStorage
+function getTasks() {
+    return JSON.parse(localStorage.getItem('tasks') || '[]');
 }
 
-function populateTasks(tasks) {
-    const toDo = document.getElementById("to-do-tasks");
-    const inProgress = document.getElementById("in-progress-tasks");
-    const completed = document.getElementById("completed-tasks");
+// Initialize task tracker and load tasks
+function initializeTaskTracker() {
+    const todoList = document.getElementById('todo-list');
+    const inProgressList = document.getElementById('in-progress-list');
+    const doneList = document.getElementById('done-list');
 
-    toDo.innerHTML = "";
-    inProgress.innerHTML = "";
-    completed.innerHTML = "";
+    // Load tasks and distribute them into columns based on status
+    loadTasksIntoColumns(todoList, inProgressList, doneList);
 
-    for (const [id, task] of Object.entries(tasks)) {
-        const taskElement = createTaskElement(id, task);
-
-        if (task.status === "to-do") {
-            toDo.appendChild(taskElement);
-        } else if (task.status === "in-progress") {
-            inProgress.appendChild(taskElement);
-        } else if (task.status === "completed") {
-            completed.appendChild(taskElement);
-        }
-    }
+    // Enable drag events for columns
+    addDragAndDropEvents(todoList);
+    addDragAndDropEvents(inProgressList);
+    addDragAndDropEvents(doneList);
 }
 
-function createTaskElement(id, task) {
-    const taskDiv = document.createElement("div");
-    taskDiv.className = "task";
-    taskDiv.draggable = true;
-    taskDiv.dataset.id = id;
-    taskDiv.dataset.status = task.status;
+// Add event listeners for drag-and-drop on task cards
+function addDragAndDropEvents(column) {
+    column.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const draggingCard = document.querySelector('.dragging');
+        column.appendChild(draggingCard);
+    });
 
-    taskDiv.innerHTML = `
-      <h3>${task.title}</h3>
-      <p>${task.description}</p>
-      <span>Priority: ${task.priority}</span>
-      <button class="edit-task">Edit</button>
-      <button class="delete-task">Delete</button>
-    `;
-
-    taskDiv.addEventListener("dragstart", handleDragStart);
-    taskDiv.querySelector(".delete-task").addEventListener("click", () => deleteTask(id));
-    taskDiv.querySelector(".edit-task").addEventListener("click", () => editTask(id, task));
-
-    return taskDiv;
+    column.addEventListener('drop', () => {
+        saveTaskStatuses();
+    });
 }
 
-async function deleteTask(id) {
-    try {
-        await fetch(`https://task-master-c3df1-default-rtdb.firebaseio.com/tasks/${id}.json`, {
-            method: "DELETE",
-        });
-        fetchTasks();
-    } catch (error) {
-        console.error("Error deleting task:", error);
-    }
-}
+// Load tasks and distribute them into the correct columns
+function loadTasksIntoColumns(todoList, inProgressList, doneList) {
+    const tasks = getTasks();
 
-async function editTask(id, task) {
-    const newTitle = prompt("Edit title:", task.title);
-    const newDescription = prompt("Edit description:", task.description);
-    const newPriority = prompt("Edit priority (low, medium, high):", task.priority);
+    // Clear existing tasks
+    [todoList, inProgressList, doneList].forEach(list => list.innerHTML = '');
 
-    if (newTitle && newDescription && newPriority) {
-        try {
-            await fetch(`https://task-master-c3df1-default-rtdb.firebaseio.com/tasks/${id}.json`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ title: newTitle, description: newDescription, priority: newPriority }),
-            });
-            fetchTasks();
-        } catch (error) {
-            console.error("Error editing task:", error);
-        }
-    }
-}
-
-function handleDragStart(e) {
-    e.dataTransfer.setData("id", e.target.dataset.id);
-}
-
-document.querySelectorAll(".tasks").forEach((column) => {
-    column.addEventListener("dragover", (e) => e.preventDefault());
-
-    column.addEventListener("drop", async (e) => {
-        const id = e.dataTransfer.getData("id");
-        const newStatus = column.parentElement.id;
-
-        try {
-            await fetch(`https://task-master-c3df1-default-rtdb.firebaseio.com/tasks/${id}.json`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ status: newStatus }),
-            });
-            fetchTasks();
-        } catch (error) {
-            console.error("Error updating task status:", error);
+    // Create and append task cards to their respective columns
+    tasks.forEach(task => {
+        const taskCard = createTaskCard(task);
+        switch (task.status) {
+            case 'in-progress':
+                inProgressList.appendChild(taskCard);
+                break;
+            case 'done':
+                doneList.appendChild(taskCard);
+                break;
+            default:
+                todoList.appendChild(taskCard);
+                break;
         }
     });
-});
+}
 
-fetchTasks();
+// Create a task card
+function createTaskCard(task) {
+    const card = document.createElement('div');
+    card.className = 'task-card';
+    card.setAttribute('draggable', 'true');
+    card.dataset.id = task.id;
+
+    card.innerHTML = `
+        <h3>${task.title}</h3>
+        <p>${task.description}</p>
+        <span>${formatDate(task.date)}</span>
+    `;
+
+    // Add drag event listeners
+    card.addEventListener('dragstart', () => {
+        card.classList.add('dragging');
+    });
+    card.addEventListener('dragend', () => {
+        card.classList.remove('dragging');
+    });
+
+    return card;
+}
+
+// Save task statuses after dragging and dropping
+function saveTaskStatuses() {
+    const tasks = getTasks();
+
+    const todoTasks = document.querySelectorAll('#todo-list .task-card');
+    const inProgressTasks = document.querySelectorAll('#in-progress-list .task-card');
+    const doneTasks = document.querySelectorAll('#done-list .task-card');
+
+    updateTaskStatuses(tasks, todoTasks, 'todo');
+    updateTaskStatuses(tasks, inProgressTasks, 'in-progress');
+    updateTaskStatuses(tasks, doneTasks, 'done');
+
+    // Save the updated tasks array to localStorage
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+// Update task statuses based on their column
+function updateTaskStatuses(tasks, taskCards, status) {
+    taskCards.forEach(card => {
+        const task = tasks.find(t => t.id == card.dataset.id);
+        if (task) task.status = status;
+    });
+}
+
+// Format date
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB');
+}
+
+// Initialize task tracker when the page loads
+document.addEventListener('DOMContentLoaded', initializeTaskTracker);
+
+
+function saveOrUpdateTask(task) {
+    const tasks = getTasks();
+    const existingIndex = tasks.findIndex(t => t.id == task.id);
+
+    if (existingIndex >= 0) {
+        // Update existing task
+        tasks[existingIndex] = task;
+    } else {
+        // Save new task
+        tasks.push(task);
+    }
+
+    // Save the updated tasks array to localStorage
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}

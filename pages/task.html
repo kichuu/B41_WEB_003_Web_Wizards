@@ -13,7 +13,6 @@
   </head>
   <body>
     <div class="task-container">
-      <!-- Header -->
       <div class="header">
         <div class="title">
           <h1>Create-Task</h1>
@@ -24,7 +23,6 @@
         </div>
       </div>
 
-      <!-- Task Grid -->
       <div class="task-grid" id="task-grid">
         <div class="add-new-task">
           <i class="fa-solid fa-plus"></i>
@@ -32,12 +30,12 @@
         </div>
       </div>
 
-      <!-- Task Form Modal -->
       <div class="modal" id="task-modal">
         <div class="modal-content">
           <span class="close">&times;</span>
           <h2>Add New Task</h2>
           <form id="task-form">
+            <input type="hidden" id="task-id" />
             <div class="form-group">
               <label for="title">Task Title</label>
               <input type="text" id="title" required />
@@ -58,7 +56,7 @@
                 <option value="high">High</option>
               </select>
             </div>
-            <button type="submit" class="submit-btn">Add Task</button>
+            <button type="submit" class="submit-btn">Save Task</button>
           </form>
         </div>
       </div>
