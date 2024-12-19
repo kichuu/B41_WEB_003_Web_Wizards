@@ -28,7 +28,7 @@ A task management application built with HTML, CSS, and JavaScript that helps us
 
 1. Clone the repository
 
-git clone https://github.com/yourusername/task-master.git
+git clone https://github.com/kichuu/B41_WEB_003_Web_Wizards.git
 
 2. Open the project folder and launch index.html in your web browser
 
