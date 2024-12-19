@@ -1,5 +1,6 @@
 const express = require("express")
 const dotenv = require("dotenv")
+const cors = require("cors") // Import CORS
 const connectDB = require("./config/db")
 const authRoutes = require("./routes/authRoutes")
 const taskRoutes = require("./routes/taskRoutes")
@@ -8,6 +9,13 @@ dotenv.config()
 connectDB()
 
 const app = express()
+
+// Enable CORS for all origins
+app.use(cors({
+  origin: "*", 
+  methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
+}))
+
 app.use(express.json())
 
 // Routes
