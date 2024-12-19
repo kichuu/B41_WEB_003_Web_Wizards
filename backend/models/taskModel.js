@@ -10,7 +10,9 @@ const taskSchema = new mongoose.Schema(
       enum: ["low", "medium", "high"],
       default: "medium",
     },
-    user: { type: String, required: true },
+    assignedTo : {type : String},
+    createdBy: { type: String, required: true },
+    project: { type: mongoose.Schema.Types.ObjectId, ref: "Project" },
   },
   { timestamps: true }
 )
