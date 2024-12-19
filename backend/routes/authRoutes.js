@@ -39,4 +39,20 @@ router.post('/login', async (req, res) => {
     }
 });
 
+router.get('/', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const user = await User.find();
+        return res.status(200).json(user);
+
+       
+
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
+
 module.exports = router;
