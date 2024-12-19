@@ -35,6 +35,7 @@
 
   /* Border Radius */
   --border-radius: 6px;
+  --border-color: rgba(245, 245, 245, 0.8);
 
   /* Shadows */
   --shadow-small: 0 2px 5px rgba(0, 0, 0, 0.2);

@@ -3,10 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task-Creater</title>
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="../assets/styles/task.css" />
+    <script
+      src="https://kit.fontawesome.com/744e7ecd29.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <h1>Create-Task</h1>
-    <p>Manage and view all your tasks here.</p>
+    <div class="task-container">
+      <!-- Header -->
+      <div class="header">
+        <div class="title">
+          <h1>Create-Task</h1>
+          <p>Manage and view all your tasks here.</p>
+        </div>
+        <div id="add-task-button">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+      </div>
+
+      <!-- Task Grid -->
+      <div class="task-grid">
+        <div class="task-card completed">
+          <h3>Hello World</h3>
+          <p>Hello World here...</p>
+          <div class="task-footer">
+            <span>03/11/2023</span>
+            <span class="status">Completed</span>
+          </div>
+        </div>
+        <div class="task-card completed">
+          <h3>Update Passwords</h3>
+          <p>
+            Review online accounts and update passwords for better security. Use
+            a password manager to keep track.
+          </p>
+          <div class="task-footer">
+            <span>11/10/2023</span>
+            <span class="status">Completed</span>
+          </div>
+        </div>
+        <div class="task-card incomplete">
+          <h3>Watch a Video</h3>
+          <p>
+            Watch the latest JavaScript course by Fireship to enhance your
+            skills.
+          </p>
+          <div class="task-footer">
+            <span>10/11/2023</span>
+            <span class="status">Incomplete</span>
+          </div>
+        </div>
+        <div class="task-card incomplete">
+          <h3>Attend Yoga Class</h3>
+          <p>
+            Join the local yoga studio this weekend to relax and improve
+            flexibility.
+          </p>
+          <div class="task-footer">
+            <span>27/10/2023</span>
+            <span class="status">Incomplete</span>
+          </div>
+        </div>
+        <div class="task-card completed">
+          <h3>Dentist Appointment</h3>
+          <p>Schedule a 6-month check-up with the dentist.</p>
+          <div class="task-footer">
+            <span>25/10/2023</span>
+            <span class="status">Completed</span>
+          </div>
+        </div>
+        <div class="add-new-task">
+          <i class="fa-solid fa-plus"></i>
+          <p>Add New Task</p>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
