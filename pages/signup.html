@@ -6,9 +6,9 @@
     <title>Sign Up - Task Management</title>
     <!-- Root Styles -->
     <link rel="stylesheet" href="../assets/styles/root.css" />
-    <!-- Login Styles -->
+    <!-- Signup Styles -->
     <link rel="stylesheet" href="../assets/styles/signup.css" />
-    <!-- cdn-libraries -->
+    <!-- CDN Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
@@ -24,6 +24,7 @@
       referrerpolicy="no-referrer"
     />
     <script src="../assets/js/toast.js"></script>
+
   </head>
   <body>
     <div class="signup-container">
@@ -35,7 +36,7 @@
 
       <!-- Right Section (Signup Form) -->
       <div class="signup-right">
-        <form class="signup-form">
+        <form class="signup-form" id="signupForm">
           <h2>Sign Up</h2>
           <div class="input-group">
             <label for="name">Full Name</label>
@@ -81,37 +82,6 @@
       </div>
     </div>
 
-    <script>
-      document
-        .querySelector(".signup-form")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          // Mock form validation (just for example)
-          const name = document.getElementById("name").value;
-          const email = document.getElementById("email").value;
-          const password = document.getElementById("password").value;
-          const confirmPassword =
-            document.getElementById("confirm-password").value;
-
-          if (!name || !email || !password || !confirmPassword) {
-            toastr.error("All fields are required!", "Validation Error");
-            return;
-          }
-
-          if (password !== confirmPassword) {
-            toastr.error("Passwords do not match!", "Error");
-            return;
-          }
-
-          // Show success toast
-          toastr.success("Account created successfully!", "Welcome");
-
-          // Redirect (mock example)
-          setTimeout(() => {
-            window.location.href = "./login.html";
-          }, 2000);
-        });
-    </script>
+    <script src="../assets/js/signup.js"></script>
   </body>
 </html>

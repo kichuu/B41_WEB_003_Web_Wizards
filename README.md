@@ -50,6 +50,171 @@ git clone https://github.com/yourusername/task-master.git
 
 Open the developer tools in your browser to view console logs and test functionality.
 
+# Task Management System Backend
+
+A simple task management system built using Node.js, Express, MongoDB, and JWT authentication. This system allows users to manage tasks with features like creating, updating, and deleting tasks.
+
+---
+
+## Features
+
+- User authentication using JWT (JSON Web Tokens).
+- Create, read, update, and delete tasks.
+- Secure password storage using bcrypt.
+- Role-based access control for tasks.
+
+---
+
+## Installation
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [MongoDB](https://www.mongodb.com/) (local or cloud instance)
+- [Postman](https://www.postman.com/) (optional, for API testing)
+
+### Steps
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the root directory:
+   ```plaintext
+   MONGO_URI=mongodb://localhost:27017/taskmanagement
+   JWT_SECRET=your_jwt_secret
+   PORT=5000
+   ```
+
+4. Start the server:
+   ```bash
+   npm run dev
+   ```
+   The server will run at `http://localhost:5000`.
+
+---
+
+## API Endpoints
+
+### **User Routes**
+
+#### **Register a User**
+- **POST** `/api/auth/register`
+- **Request Body:**
+  ```json
+  {
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "securepassword123"
+  }
+  ```
+
+#### **Login a User**
+- **POST** `/api/auth/login`
+- **Request Body:**
+  ```json
+  {
+    "email": "john.doe@example.com",
+    "password": "securepassword123"
+  }
+  ```
+
+
+### **Task Routes**
+
+#### **Create a Task**
+- **POST** `/api/tasks`
+- **Headers:**
+  ```json
+  {
+    "Authorization": "Bearer <your_jwt_token>"
+  }
+  ```
+- **Request Body:**
+  ```json
+  {
+    "title": "Complete Project Report",
+    "description": "Finalize and submit the project report by end of the day.",
+    "status": "in-progress"
+  }
+  ```
+
+#### **Get All Tasks**
+- **GET** `/api/tasks`
+- **Headers:**
+  ```json
+  {
+    "Authorization": "Bearer <your_jwt_token>"
+  }
+  ```
+
+#### **Update a Task**
+- **PUT** `/api/tasks/:id`
+- **Headers:**
+  ```json
+  {
+    "Authorization": "Bearer <your_jwt_token>"
+  }
+  ```
+- **Request Body:**
+  ```json
+  {
+    "title": "Complete Project Report (Updated)",
+    "status": "completed"
+  }
+  ```
+
+#### **Delete a Task**
+- **DELETE** `/api/tasks/:id`
+- **Headers:**
+  ```json
+  {
+    "Authorization": "Bearer <your_jwt_token>"
+  }
+  ```
+
+---
+
+## Folder Structure
+
+```
+project-folder/
+├── backend/
+│   ├── config/
+│   │   └── db.js
+│   ├── models/
+│   │   ├── userModel.js
+│   │   └── taskModel.js
+│   ├── routes/
+│   │   ├── userRoutes.js
+│   │   └── taskRoutes.js
+│   ├── middleware/
+│   │   └── authMiddleware.js
+│   ├── .env
+│   ├── server.js
+│   ├── package.json
+│   └── README.md
+```
+
+---
+
+## Technologies Used
+
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **Authentication**: JWT (JSON Web Token)
+- **Password Hashing**: bcrypt
+
+---
+
 ## Contributing
 
 1. Fork the repository
