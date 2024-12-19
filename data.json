@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Complete project report",
+      "description": "Finish the report for the client project.",
+      "date": "2023-12-20",
+      "priority": "High",
+      "status": "To-Do"
+    },
+    {
+      "id": 2,
+      "title": "Team meeting",
+      "description": "Discuss project updates and milestones.",
+      "date": "2023-12-21",
+      "priority": "Medium",
+      "status": "In-Progress"
+    },
+    {
+      "id": 3,
+      "title": "Gym session",
+      "description": "Attend a 1-hour workout session.",
+      "date": "2023-12-22",
+      "priority": "Low",
+      "status": "Completed"
+    }
+  ]
+}

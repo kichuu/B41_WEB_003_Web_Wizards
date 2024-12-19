@@ -9,6 +9,7 @@
       src="https://kit.fontawesome.com/744e7ecd29.js"
       crossorigin="anonymous"
     ></script>
+    <script src="../assets/scripts/task.js" defer></script>
   </head>
   <body>
     <div class="task-container">
@@ -24,59 +25,41 @@
       </div>
 
       <!-- Task Grid -->
-      <div class="task-grid">
-        <div class="task-card completed">
-          <h3>Hello World</h3>
-          <p>Hello World here...</p>
-          <div class="task-footer">
-            <span>03/11/2023</span>
-            <span class="status">Completed</span>
-          </div>
-        </div>
-        <div class="task-card completed">
-          <h3>Update Passwords</h3>
-          <p>
-            Review online accounts and update passwords for better security. Use
-            a password manager to keep track.
-          </p>
-          <div class="task-footer">
-            <span>11/10/2023</span>
-            <span class="status">Completed</span>
-          </div>
-        </div>
-        <div class="task-card incomplete">
-          <h3>Watch a Video</h3>
-          <p>
-            Watch the latest JavaScript course by Fireship to enhance your
-            skills.
-          </p>
-          <div class="task-footer">
-            <span>10/11/2023</span>
-            <span class="status">Incomplete</span>
-          </div>
-        </div>
-        <div class="task-card incomplete">
-          <h3>Attend Yoga Class</h3>
-          <p>
-            Join the local yoga studio this weekend to relax and improve
-            flexibility.
-          </p>
-          <div class="task-footer">
-            <span>27/10/2023</span>
-            <span class="status">Incomplete</span>
-          </div>
-        </div>
-        <div class="task-card completed">
-          <h3>Dentist Appointment</h3>
-          <p>Schedule a 6-month check-up with the dentist.</p>
-          <div class="task-footer">
-            <span>25/10/2023</span>
-            <span class="status">Completed</span>
-          </div>
-        </div>
+      <div class="task-grid" id="task-grid">
         <div class="add-new-task">
           <i class="fa-solid fa-plus"></i>
           <p>Add New Task</p>
+        </div>
+      </div>
+
+      <!-- Task Form Modal -->
+      <div class="modal" id="task-modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Add New Task</h2>
+          <form id="task-form">
+            <div class="form-group">
+              <label for="title">Task Title</label>
+              <input type="text" id="title" required />
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea id="description" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="date">Due Date</label>
+              <input type="date" id="date" required />
+            </div>
+            <div class="form-group">
+              <label for="priority">Priority</label>
+              <select id="priority" required>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <button type="submit" class="submit-btn">Add Task</button>
+          </form>
         </div>
       </div>
     </div>
