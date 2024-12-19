@@ -1,0 +1,37 @@
+.container {
+  padding: var(--spacing-large);
+  color: var(--text-primary);
+}
+
+.columns {
+  display: flex;
+  gap: var(--spacing-medium);
+}
+
+.column {
+  flex: 1;
+  background-color: var(--background-secondary);
+  padding: var(--spacing-medium);
+  border-radius: var(--border-radius);
+}
+
+.tasks {
+  margin-top: var(--spacing-medium);
+}
+
+.task {
+  background-color: var(--background-card);
+  padding: var(--spacing-small);
+  margin-bottom: var(--spacing-small);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-small);
+}
+
+.task h3 {
+  margin: 0;
+}
+
+.task button {
+  margin-top: var(--spacing-small);
+  margin-right: var(--spacing-small);
+}

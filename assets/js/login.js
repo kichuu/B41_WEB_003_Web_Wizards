@@ -1,3 +1,9 @@
+
+document.querySelector("form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    window.location.href = "./dashboard.html";
+})
+
 // Handle Login Form Submission
 console.log("test")
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
@@ -34,3 +40,4 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     console.error(err)
   }
 })
+
