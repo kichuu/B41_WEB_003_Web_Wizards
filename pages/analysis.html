@@ -3,10 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Analysis - Task Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="analysis.css" />
   </head>
   <body>
-    <h1>Analysis marked</h1>
-    <p>you can Analysis your activity</p>
+    <h1>Activity Analysis</h1>
+
+    <!-- analysis.html -->
+    <div class="charts-container">
+      <!-- Task Completion Chart -->
+      <canvas id="taskCompletionChart" width="400" height="200"></canvas>
+
+      <!-- Task Priority Chart -->
+      <canvas id="taskPriorityChart" width="400" height="200"></canvas>
+
+      <!-- Task Status Chart -->
+      <canvas id="taskStatusChart" width="400" height="200"></canvas>
+    </div>
+
+    <script src="analysis.js"></script>
   </body>
 </html>

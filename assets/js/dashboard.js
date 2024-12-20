@@ -41,6 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
 })
 
 // Task Management Functions
+// Task Management Functions
 function initializeTaskPage() {
   const modal = document.getElementById("task-modal")
   const addTaskButton = document.getElementById("add-task-button")
@@ -275,3 +276,6 @@ function formatDate(dateString) {
   const date = new Date(dateString)
   return date.toLocaleDateString("en-GB")
 }
+
+// Initialize task tracker when the page loads
+document.addEventListener("DOMContentLoaded", initializeTaskTracker);

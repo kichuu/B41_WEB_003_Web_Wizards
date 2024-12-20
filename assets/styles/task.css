@@ -67,6 +67,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 0.8rem;
+  position: relative;
 }
 
 .task-card h3 {
@@ -117,6 +119,29 @@ body {
 .high .priority {
   background-color: #f44336;
   color: #000;
+}
+
+/* Styling for Icons Container */
+.icons {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.edit-btn,
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-color);
+  padding: 0.5rem;
+  font-size: 1.2rem; /* Adjust size for visibility */
+  transition: transform 0.2s ease-in-out;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  transform: scale(1.1); /* Add hover effect for interactivity */
+  color: #1e90ff; /* Optional hover color (blue) */
 }
 
 /* Add New Task Card */
@@ -288,19 +313,4 @@ body {
 .submit-btn:hover {
   opacity: 0.9;
   transform: translateY(-2px);
-}
-
-.delete-btn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--primary-color);
-  margin-bottom: 15px;
-}
-
-.edit-btn {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--primary-color);
 }
