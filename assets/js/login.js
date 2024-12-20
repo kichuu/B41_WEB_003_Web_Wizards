@@ -1,8 +1,8 @@
 
-document.querySelector("form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    window.location.href = "./dashboard.html";
-})
+// document.querySelector("form").addEventListener("submit", (e) => {
+//     e.preventDefault();
+//     window.location.href = "./dashboard.html";
+// })
 
 // Handle Login Form Submission
 console.log("test")
