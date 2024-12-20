@@ -1,6 +1,11 @@
-// Select the container where content will be loaded
+// Select the container where content will be loaded\
+const username = document.getElementById("username");
 const contentContainer = document.getElementById("content");
-
+const token = localStorage.getItem("token");
+console.log(token)
+if(!token){
+    window.location.href = "./login.html"
+}
 // Function to load a page dynamically
 function loadPage(page) {
     // Fetch the content of the page
@@ -48,6 +53,10 @@ function initializeTaskPage() {
     const taskForm = document.getElementById('task-form');
     const taskGrid = document.getElementById('task-grid');
 
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    username.innerHTML = user.name;
+
     // Add event listeners
     if (addTaskButton) {
         addTaskButton.addEventListener('click', () => openModal(modal));
@@ -90,17 +99,42 @@ function handleTaskSubmit(e, modal, form, taskGrid) {
     e.preventDefault();
 
     const task = {
-        id: Date.now(),
         title: document.getElementById('title').value,
         description: document.getElementById('description').value,
-        date: document.getElementById('date').value,
-        priority: document.getElementById('priority').value // Removed status field
+        dueDate: document.getElementById('date').value,
+        priority: document.getElementById('priority').value
     };
 
-    saveTask(task);
-    addTaskToGrid(task, taskGrid);
-    closeModal(modal, form);
+    // Send the task to the backend
+    fetch('http://localhost:5000/api/tasks/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}` // Assuming you use JWT
+        },
+        body: JSON.stringify(task)
+    })
+    .then(response => {
+        console.log(task)
+
+        if (!response.ok) {
+            throw new Error('Failed to add task');
+        }
+        console.log(response)
+        return response.json();
+    })
+    .then(savedTask => {
+        // Optionally save to localStorage if needed
+        saveTask(savedTask);
+        addTaskToGrid(savedTask, taskGrid);
+        closeModal(modal, form);
+    })
+    .catch(error => {
+        console.error('Error adding task:', error);
+        alert('Failed to add task. Please try again.');
+    });
 }
+ 
 
 function saveTask(task) {
     const tasks = getTasks();
@@ -122,10 +156,32 @@ function loadTasks(taskGrid) {
         taskGrid.appendChild(addNewTaskCard);
     }
 
-    // Load and display tasks
-    const tasks = getTasks();
-    tasks.forEach(task => addTaskToGrid(task, taskGrid));
+    // Fetch tasks from the API
+    fetch('http://localhost:5000/api/tasks/', {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}` // Assuming you use JWT
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch tasks');
+            }
+            return response.json();
+        })
+        .then(tasks => {
+            // Add each task to the grid
+            tasks.forEach(task => 
+                {addTaskToGrid(task, taskGrid)
+            console.log(task)}
+        );
+        })
+        .catch(error => {
+            console.error('Error fetching tasks:', error);
+            alert('Failed to load tasks. Please try again.');
+        });
 }
+
 
 function addTaskToGrid(task, taskGrid) {
     if (!taskGrid) return;
@@ -137,7 +193,7 @@ function addTaskToGrid(task, taskGrid) {
         <h3>${task.title}</h3>
         <p>${task.description}</p>
         <div class="task-footer">
-            <span>${formatDate(task.date)}</span>
+            <span>${formatDate(task.dueDate)}</span>
             <span class="priority">${task.priority}</span> <!-- Display priority instead of status -->
         </div>
     `;
@@ -154,16 +210,37 @@ function addTaskToGrid(task, taskGrid) {
     const deleteBtn = taskCard.querySelector('.delete-btn');
     if (deleteBtn) {
         deleteBtn.addEventListener('click', () => {
-            deleteTask(task.id, taskGrid);
+            deleteTask(task._id, taskGrid);
         });
     }
 }
 
 function deleteTask(id, taskGrid) {
-    const tasks = getTasks().filter(task => task.id !== id);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    loadTasks(taskGrid);
+    // Send a DELETE request to the backend
+    fetch(`http://localhost:5000/api/tasks/${id}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}` // Assuming you use JWT
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to delete task');
+        }
+        return response.json(); // Optional, depending on your API's response
+    })
+    .then(() => {
+        // Remove the task from the UI
+        const tasks = getTasks().filter(task => task.id !== id);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        loadTasks(taskGrid); // Reload tasks to reflect changes
+    })
+    .catch(error => {
+        console.error('Error deleting task:', error);
+        alert('Failed to delete task. Please try again.');
+    });
 }
+
 
 function formatDate(dateString) {
     const date = new Date(dateString);
