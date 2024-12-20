@@ -1,124 +1,120 @@
-// DOM Elements
-const modal = document.getElementById('task-modal');
-const addTaskButton = document.getElementById('add-task-button');
-const addNewTaskCard = document.querySelector('.add-new-task');
-const closeButton = document.querySelector('.close');
-const taskForm = document.getElementById('task-form');
-const taskGrid = document.getElementById('task-grid');
+// // DOM Elements
 
-// Event Listeners
-[addTaskButton, addNewTaskCard].forEach(element => {
-    element.addEventListener('click', openModal);
-});
 
-closeButton.addEventListener('click', closeModal);
-window.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-});
 
-taskForm.addEventListener('submit', handleTaskSubmit);
-document.addEventListener('DOMContentLoaded', loadTasks);
+// const modal = document.getElementById('task-modal');
+// const addTaskButton = document.getElementById('add-task-button');
+// const addNewTaskCard = document.querySelector('.add-new-task');
+// const closeButton = document.querySelector('.close');
+// const taskForm = document.getElementById('task-form');
+// const taskGrid = document.getElementById('task-grid');
+// const submitBtn = document.getElementById('submitBtn');
+// console.log(submitBtn)
+// // Retrieve token from localStorage
+// console.log(token);  // Debugging statement
+// // http://localhost:5000/api/tasks/
 
-// Functions
-function openModal() {
-    modal.style.display = 'block';
-}
+// // Redirect to login if no token is found
+// if (!token) {
+//     window.location.href = './login.html';  // Redirect to login if no token is found
+// }
 
-function closeModal() {
-    modal.style.display = 'none';
-    taskForm.reset();
-}
+// // Event Listeners
+// [addTaskButton, addNewTaskCard].forEach(element => {
+//     element.addEventListener('click', openModal);
+// });
 
-function handleTaskSubmit(e) {
-    e.preventDefault();
+// closeButton.addEventListener('click', closeModal);
+// window.addEventListener('click', (e) => {
+//     if (e.target === modal) closeModal();
+// });
 
-    const task = {
-        id: Date.now(),
-        title: document.getElementById('title').value,
-        description: document.getElementById('description').value,
-        date: document.getElementById('date').value,
-        priority: document.getElementById('priority').value,
-    };
+// submitBtn.addEventListener('click', handleTaskSubmit);  // Corrected to call handleTaskSubmit
 
-    saveTask(task);
-    addTaskToGrid(task);
-    closeModal();
-}
+// // Event Listeners for DOMContentLoaded
+// document.addEventListener('DOMContentLoaded', loadTasks);  // Event Listeners
 
-function saveTask(task) {
-    const tasks = getTasks();
-    tasks.push(task);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
+// // Function to open the modal
+// function openModal() {
+//     modal.style.display = 'block';
+// }
 
-function getTasks() {
-    return JSON.parse(localStorage.getItem('tasks') || '[]');
-}
+// // Function to close the modal
+// function closeModal() {
+//     modal.style.display = 'none';
+//     taskForm.reset();
+// }
 
-function loadTasks() {
-    const tasks = getTasks();
-    tasks.forEach(task => addTaskToGrid(task));
-}
+// // Function to handle form submission
+// function handleTaskSubmit(e) {
+//     e.preventDefault();
+//     console.log("hi")
 
-function addTaskToGrid(task) {
-    const taskCard = document.createElement('div');
-    taskCard.className = `task-card ${task.priority}`;
-    taskCard.innerHTML = `
-    <span class="priority">${task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}</span>
-    <h3>${task.title}</h3>
-    <p class="description">${task.description}</p>
-    <div class="task-footer">
-      <span>${formatDate(task.date)}</span>
-    </div>
-    <button class="edit-btn" onclick="editTask(${task.id})">Edit</button>
-    <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
-  `;
 
-    // Insert before the "Add New Task" card
-    taskGrid.insertBefore(taskCard, taskGrid.lastElementChild);
-}
+//     const task = {
+//         title: document.getElementById('title').value,
+//         description: document.getElementById('description').value,
+//         dueDate: document.getElementById('date').value,  // Corrected 'due-date' to 'date'
+//         priority: document.getElementById('priority').value,
+//         status: 'pending',  // Assuming status is 'pending' by default
+//     };
+//     console.log(task);
+//     saveTaskToServer(task);
+// }
 
-function deleteTask(id) {
-    const tasks = getTasks().filter(task => task.id !== id);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    refreshTaskGrid();
-}
+// // Function to load tasks from the server
+// function loadTasks() {
+//     fetch('http://localhost:5000/api/tasks/', {
+//         headers: {
+//             'Authorization': `Bearer ${token}`
+//         }
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             taskGrid.innerHTML = '';  // Clear the existing tasks
+//             data.forEach(task => {
+//                 const taskCard = createTaskCard(task);
+//                 taskGrid.appendChild(taskCard);
+//             });
+//         })
+//         .catch(error => {
+//             console.error('Error loading tasks:', error);
+//             alert('Failed to load tasks.');
+//         });
+// }
 
-function editTask(id) {
-    const tasks = getTasks();
-    const task = tasks.find(task => task.id === id);
+// // Function to create a task card element
+// function createTaskCard(task) {
+//     const taskCard = document.createElement('div');
+//     taskCard.className = 'task-card';
+//     taskCard.innerHTML = `
+//         <h3>${task.title}</h3>
+//         <p>${task.description}</p>
+//         <p>Due Date: ${task.dueDate}</p>
+//         <p>Priority: ${task.priority}</p>
+//         <p>Status: ${task.status}</p>
+//     `;
+//     return taskCard;
+// }
 
-    // Populate the form with task data
-    document.getElementById('title').value = task.title;
-    document.getElementById('description').value = task.description;
-    document.getElementById('date').value = task.date;
-    document.getElementById('priority').value = task.priority;
-
-    // Update the task when form is submitted
-    taskForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        task.title = document.getElementById('title').value;
-        task.description = document.getElementById('description').value;
-        task.date = document.getElementById('date').value;
-        task.priority = document.getElementById('priority').value;
-
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        refreshTaskGrid();
-        closeModal();
-    });
-
-    openModal();
-}
-
-function refreshTaskGrid() {
-    // Clear all tasks except the "Add New Task" card
-    const addNewTaskCard = taskGrid.lastElementChild;
-    taskGrid.innerHTML = '';
-    taskGrid.appendChild(addNewTaskCard);
-    loadTasks();
-}
-
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-GB');
-}
+// // Function to save a task to the server
+// function saveTaskToServer(task) {
+//     fetch('http://localhost:5000/api/tasks/', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': `Bearer ${token}`
+//         },
+//         body: JSON.stringify(task),
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             const taskCard = createTaskCard(data);
+//             taskGrid.appendChild(taskCard);  // Add new task to task grid
+//             closeModal();  // Close modal after successful task submission
+//         })
+//         .catch(error => {
+//             console.error('Error:', error);
+//             alert('Failed to save task. Please try again.');
+//         });
+// }
