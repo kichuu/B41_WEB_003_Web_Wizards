@@ -1,37 +1,54 @@
-.container {
-  padding: var(--spacing-large);
-  color: var(--text-primary);
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.columns {
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.task-board {
   display: flex;
-  gap: var(--spacing-medium);
+  justify-content: space-between;
+  padding: 20px;
+  gap: 1rem;
 }
 
-.column {
+.task-column {
   flex: 1;
   background-color: var(--background-secondary);
-  padding: var(--spacing-medium);
-  border-radius: var(--border-radius);
+  border: 1px solid whitesmoke;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  color: #fafafa;
 }
 
-.tasks {
-  margin-top: var(--spacing-medium);
+.task-column h2 {
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.task {
-  background-color: var(--background-card);
-  padding: var(--spacing-small);
-  margin-bottom: var(--spacing-small);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-small);
+.task-list {
+  min-height: 300px;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  overflow-y: auto;
 }
 
-.task h3 {
-  margin: 0;
+.task-card {
+  background: #ffffff;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: grab;
 }
 
-.task button {
-  margin-top: var(--spacing-small);
-  margin-right: var(--spacing-small);
+.task-card.dragging {
+  opacity: 0.5;
+  border: 2px dashed #007bff;
 }
