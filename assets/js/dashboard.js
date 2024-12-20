@@ -423,5 +423,15 @@ function updateTaskStatus(taskId, newStatus) {
 window.addEventListener("DOMContentLoaded", () => {
   const lastPage = localStorage.getItem("currentPage") || "task.html"
   loadPage(lastPage)
+  const logoutButton = document.querySelector('.logout-button');
+
+// Add click event listener to the logout button
+logoutButton.addEventListener('click', () => {
+  // Remove the token from localStorage
+  localStorage.removeItem('token');
+
+  // Optionally, redirect to the login page
+  window.location.href = 'login.html'; // Change to your login page URL
+});
   // fetchTasks()
 })
