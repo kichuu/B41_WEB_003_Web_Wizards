@@ -1,4 +1,10 @@
 /* login.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: var(--font-primary);
@@ -7,7 +13,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  padding: var(--spacing-medium);
 }
 
 .login-container {
@@ -18,6 +25,7 @@ body {
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-medium);
   overflow: hidden;
+  flex-direction: row;
 }
 
 /* Left Section */
@@ -35,12 +43,12 @@ body {
 
 .login-left h1 {
   font-family: var(--font-secondary);
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   margin-bottom: var(--spacing-medium);
 }
 
 .login-left p {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   line-height: 1.5;
 }
 
@@ -56,7 +64,7 @@ body {
 .login-form h2 {
   font-family: var(--font-secondary);
   color: var(--text-heading);
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
   margin-bottom: var(--spacing-medium);
 }
 
@@ -69,14 +77,14 @@ body {
 .input-group label {
   margin-bottom: var(--spacing-small);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
 }
 
 .input-group input {
   padding: var(--spacing-small);
   border: 1px solid var(--input-border);
   border-radius: var(--border-radius);
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
   background-color: var(--background-main);
   color: var(--text-primary);
   transition: border 0.3s ease;
@@ -93,7 +101,7 @@ body {
   padding: var(--spacing-medium);
   border: none;
   border-radius: var(--border-radius);
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
@@ -118,4 +126,39 @@ body {
 .signup-link a:hover {
   color: var(--primary-hover);
   text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    width: 95%;
+  }
+
+  .login-left,
+  .login-right {
+    padding: var(--spacing-medium);
+  }
+
+  .login-left {
+    padding-top: var(--spacing-large);
+  }
+
+  .login-right {
+    padding-bottom: var(--spacing-large);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    padding: var(--spacing-small);
+  }
+
+  .login-container {
+    width: 100%;
+  }
+
+  .input-group input,
+  .login-btn {
+    padding: calc(var(--spacing-small) * 1.2);
+  }
 }

@@ -1,27 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task Management System</title>
-    <!-- Root Styles -->
-    <link rel="stylesheet" href="./assets/styles/root.css" />
-    <!-- Index Styles -->
-    <link rel="stylesheet" href="./assets/styles/common.css" />
-  </head>
-  <body>
-    <div class="container">
-      <!-- Main Heading Section -->
-      <div class="main-heading">
-        <h1>Welcome to Task Management</h1>
-        <p>Streamline your workflow and stay organized with ease.</p>
-      </div>
 
-      <!-- Links Section -->
-      <div class="links">
-        <a href="./pages/login.html">Login</a>
-        <a href="./pages/signup.html">Signup</a>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskManager - Time Management System</title>
+  <script src="https://kit.fontawesome.com/744e7ecd29.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./assets/styles/root.css">
+  <link rel="stylesheet" href="./assets/styles/common.css">
+</head>
+
+<body>
+  <!-- Loader -->
+  <div class="loader-wrapper">
+    <div class="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
     </div>
-  </body>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar-logo">
+      <img src="./assets/images/logo.gif" alt="Task Manager Logo" class="logo-img">
+      <span class="logo-text">TASK MANAGER</span>
+    </div>
+    <nav>
+      <ul class="navbar-links">
+        <li><a href="./pages/login.html">Login</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Landing Section -->
+  <div class="landing-container">
+    <main>
+      <h1>Welcome to TaskManager</h1>
+      <p>A powerful tool designed to streamline your workflow and boost productivity.</p>
+      <a href="/pages/signup.html" class="get-started-btn">
+        Get Started <i class="fa-solid fa-paper-plane"></i>
+      </a>
+    </main>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="feature-box">
+        <h3>Organize Tasks</h3>
+        <p>Stay on top of your responsibilities with intuitive task organization features.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Set Priorities</h3>
+        <p>Focus on what matters most by prioritizing your tasks with ease.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Track Progress</h3>
+        <p>Monitor your progress and achieve your goals with insightful analytics.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Contact Us Form -->
+  <div id="contact-us-form" class="contact-us hidden">
+    <form id="contact-form">
+      <button type="button" class="close-btn">&times;</button>
+      <h2>Contact Us</h2>
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" required placeholder="Enter your email">
+      <label for="feedback">Your Feedback:</label>
+      <textarea id="feedback" name="feedback" required placeholder="Enter your feedback"></textarea>
+      <button type="submit" class="submit-btn">Send</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 TASK MANAGER. All rights reserved. | <a href="#privacy">Privacy Policy</a></p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="./assets/js/index.js"></script>
+</body>
+
 </html>

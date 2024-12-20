@@ -1,62 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="../assets/styles/root.css" />
-    <link rel="stylesheet" href="../assets/styles/dashboard.css" />
-    <link rel="stylesheet" href="../assets/styles/task-tracker.css" />
-    <script
-      src="https://kit.fontawesome.com/744e7ecd29.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <div class="container">
-      <!-- Left Sidebar -->
-      <div class="left-sidebar">
-        <section class="left">
-          <!-- User Profile -->
-          <div class="profile">
-            <i class="fa-regular fa-user"></i>
-            <h3 id="username">Durgesh Chaudhari</h3>
-          </div>
 
-          <!-- Functionality Links -->
-          <div class="functionality">
-            <a href="#" class="nav-link" data-page="analysis.html"
-              >Analyse Your Activity</a
-            >
-            <!-- <a href="#" class="nav-link" data-page="project.html"
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../assets/styles/root.css" />
+  <link rel="stylesheet" href="../assets/styles/dashboard.css" />
+  <link rel="stylesheet" href="../assets/styles/task-tracker.css" />
+  <script src="https://kit.fontawesome.com/744e7ecd29.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="dashboard-container">
+    <!-- Left Sidebar -->
+    <div class="left-sidebar">
+      <section class="left">
+        <!-- User Profile -->
+        <div class="profile">
+          <i class="fa-regular fa-user"></i>
+          <h3 id="username"></h3>
+        </div>
+
+        <!-- Functionality Links -->
+        <div class="functionality">
+          <a href="#" class="nav-link" data-page="analysis.html">Analyse Your Activity</a>
+          <!-- <a href="#" class="nav-link" data-page="project.html"
               >Create Projects</a> -->
-            <a href="#" class="nav-link" data-page="task.html">Create Task</a>
-            <a href="#" class="nav-link" data-page="task-tracker.html"
-              >Track Task</a
-            >
-            
-            <a href="#" class="nav-link" data-page="AI.html">Eagle AI</a>
-            
-          </div>
-          <!-- <br> -->
-          <!-- Logout Button -->
-          <button class="logout-button">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
-          </button>
-        </section>
-      </div>
+          <a href="#" class="nav-link" data-page="task.html">Create Task</a>
+          <a href="#" class="nav-link" data-page="task-tracker.html">Track Task</a>
 
-      <!-- Right Container -->
-      <div class="right-container">
-        <section class="right" id="content">
-          <!-- Default Content (Task Page) -->
-          <h1>Welcome to Task Manager</h1>
-          <p>Default content for tasks will be shown here.</p>
-        </section>
-      </div>
+          <a href="#" class="nav-link" data-page="AI.html">Eagle AI</a>
+
+        </div>
+        <!-- <br> -->
+        <!-- Logout Button -->
+        <button class="logout-button">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        </button>
+      </section>
     </div>
 
-    <script src="../assets/js/dashboard.js"></script>
+    <!-- Right Container -->
+    <div class="right-container">
+      <section class="right" id="content">
+        <!-- Default Content (Task Page) -->
+        <h1>Welcome to Task Manager</h1>
+        <p>Default content for tasks will be shown here.</p>
+      </section>
+    </div>
+  </div>
 
-  </body>
+  <script src="../assets/js/dashboard.js"></script>
+
+</body>
+
 </html>
