@@ -3,53 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task Tracker</title>
-    <link rel="stylesheet" href="../assets/styles/task-tracker.css" />
+    <title>Task-Tracker</title>
+  
   </head>
   <body>
     <h1>Task Tracker</h1>
+    <p>Track your ongoing tasks here.</p>
 
-    <div class="task-board">
-      <!-- To-Do Column -->
-      <div class="task-column">
-        <h2>To-Do</h2>
-        <div
-          class="task-list"
-          id="todo-list"
-          ondrop="drop(event)"
-          ondragover="allowDrop(event)"
-        >
-          <!-- Task cards will be inserted here -->
-        </div>
+    <div id="task-board" class="board">
+      <div
+        id="todo"
+        class="column"
+        ondrop="drop(event)"
+        ondragover="allowDrop(event)"
+      >
+        <h3>To Do</h3>
+        <div id="todo-tasks"></div>
       </div>
-
-      <!-- In-Progress Column -->
-      <div class="task-column">
-        <h2>In-Progress</h2>
-        <div
-          class="task-list"
-          id="in-progress-list"
-          ondrop="drop(event)"
-          ondragover="allowDrop(event)"
-        >
-          <!-- Task cards will be inserted here -->
-        </div>
+      <div
+        id="in-progress"
+        class="column"
+        ondrop="drop(event)"
+        ondragover="allowDrop(event)"
+      >
+        <h3>In Progress</h3>
+        <div id="in-progress-tasks"></div>
       </div>
-
-      <!-- Done Column -->
-      <div class="task-column">
-        <h2>Done</h2>
-        <div
-          class="task-list"
-          id="done-list"
-          ondrop="drop(event)"
-          ondragover="allowDrop(event)"
-        >
-          <!-- Task cards will be inserted here -->
-        </div>
+      <div
+        id="done"
+        class="column"
+        ondrop="drop(event)"
+        ondragover="allowDrop(event)"
+      >
+        <h3>Done</h3>
+        <div id="done-tasks"></div>
       </div>
     </div>
 
-    <script src="../assets/js/task-tracker.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
