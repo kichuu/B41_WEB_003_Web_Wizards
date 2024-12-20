@@ -4,9 +4,141 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task-Tracker</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  color: #333;
+}
+
+p {
+  text-align: center;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.board {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 0 50px;
+}
+
+.column {
+  width: 30%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #ffffff;
+  min-height: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.column h3 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.task {
+  padding: 15px;
+  margin: 10px 0;
+  background-color: #e3e3e3;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.task.dragging {
+  opacity: 0.5;
+}
+
+.task .task-title {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.task .task-details {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 5px;
+}
+
+.task .task-priority {
+  font-size: 0.8em;
+  color: #888;
+  margin-top: 5px;
+}
+
+#todo-tasks, #in-progress-tasks, #done-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.column:empty::before {
+  content: "No tasks here yet";
+  color: #bbb;
+  text-align: center;
+  font-style: italic;
+}
+
+.column h3 {
+  color: #333;
+}
+
+    </style>
   </head>
   <body>
     <h1>Task Tracker</h1>
     <p>Track your ongoing tasks here.</p>
+
+    <div id="task-board" class="board">
+      <div
+        id="todo"
+        class="column"
+        ondrop="drop(event)"
+        ondragover="allowDrop(event)"
+      >
+        <h3>To Do</h3>
+        <div id="todo-tasks"></div>
+      </div>
+      <div
+        id="in-progress"
+        class="column"
+        ondrop="drop(event)"
+        ondragover="allowDrop(event)"
+      >
+        <h3>In Progress</h3>
+        <div id="in-progress-tasks"></div>
+      </div>
+      <div
+        id="done"
+        class="column"
+        ondrop="drop(event)"
+        ondragover="allowDrop(event)"
+      >
+        <h3>Done</h3>
+        <div id="done-tasks"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>

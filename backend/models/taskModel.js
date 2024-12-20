@@ -11,6 +11,7 @@ const taskSchema = new mongoose.Schema(
       default: "medium",
     },
     dueDate: { type: Date },
+    status: { type: String, default: "pending" },
     assignedTo : {type : String},
     createdBy: { type: String, required: true },
     project: { type: mongoose.Schema.Types.ObjectId, ref: "Project" },
