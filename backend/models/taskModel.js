@@ -4,14 +4,13 @@ const taskSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     description: { type: String },
-    status: { type: String, default: "pending" },
     priority: {
       type: String,
       enum: ["low", "medium", "high"],
       default: "medium",
     },
     dueDate: { type: Date },
-    status: { type: String, default: "pending" },
+    status: { type: String, default: "todo" },
     assignedTo : {type : String},
     createdBy: { type: String, required: true },
     project: { type: mongoose.Schema.Types.ObjectId, ref: "Project" },
