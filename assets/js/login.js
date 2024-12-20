@@ -5,8 +5,10 @@
 // })
 
 // Handle Login Form Submission
-console.log("test")
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  if (localStorage.getItem("token")) {
+    window.location.href = "./dashboard.html"
+  }
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault() 
 
   const email = document.getElementById("email").value
