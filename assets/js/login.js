@@ -27,6 +27,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
       const data = await response.json()
       // Save Token in LocalStorage
       localStorage.setItem("token", data.token)
+      localStorage.setItem("user", JSON.stringify(data.user))
       alert("Login successful! Redirecting to dashboard...")
       // Redirect to Dashboard
       window.location.href = "./dashboard.html"
