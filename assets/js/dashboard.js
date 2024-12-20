@@ -106,7 +106,7 @@ function handleTaskSubmit(e, modal, form, taskGrid) {
     };
 
     // Send the task to the backend
-    fetch('http://localhost:5000/api/tasks/', {
+    fetch('https://b41-web-003-web-wizards.onrender.com/api/tasks/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -157,7 +157,7 @@ function loadTasks(taskGrid) {
     }
 
     // Fetch tasks from the API
-    fetch('http://localhost:5000/api/tasks/', {
+    fetch('https://b41-web-003-web-wizards.onrender.com/api/tasks/', {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}` // Assuming you use JWT
@@ -217,7 +217,7 @@ function addTaskToGrid(task, taskGrid) {
 
 function deleteTask(id, taskGrid) {
     // Send a DELETE request to the backend
-    fetch(`http://localhost:5000/api/tasks/${id}`, {
+    fetch(`https://b41-web-003-web-wizards.onrender.com/api/tasks/${id}`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}` // Assuming you use JWT

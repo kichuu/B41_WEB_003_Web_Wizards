@@ -15,7 +15,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   try {
     // Send Login Request to Deployed or localHost Backend
     const response = await fetch(
-      "http://localhost:5000/api/users/login/",
+      "https://b41-web-003-web-wizards.onrender.com/api/users/login/",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
