@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects</title>
+    <link rel="stylesheet" href="../assets/styles/root.css" />
+    <link rel="stylesheet" href="../assets/styles/project.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Project Grid -->
+      <div id="project-grid">
+        <!-- Add New Project Card -->
+        <div class="add-new-project">
+          <button id="add-project-button">+ Add Project</button>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div id="project-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Add New Project</h2>
+          <form id="project-form">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required />
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="start-date">Start Date</label>
+            <input type="date" id="start-date" name="start-date" required />
+
+            <label for="end-date">End Date</label>
+            <input type="date" id="end-date" name="end-date" required />
+
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+
+            <button type="submit">Save Project</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="../assets/js/project.js"></script>
+  </body>
+</html>
