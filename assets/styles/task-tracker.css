@@ -1,37 +1,41 @@
-.container {
-  padding: var(--spacing-large);
-  color: var(--text-primary);
-}
-
-.columns {
-  display: flex;
+/* Task Board */
+#task-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: var(--spacing-medium);
+  padding: var(--spacing-large);
 }
 
+/* Task Column */
 .column {
-  flex: 1;
-  background-color: var(--background-secondary);
+  background-color: var(--background-main);
+  border-radius: var(--border-radius);
   padding: var(--spacing-medium);
-  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  transition: transform 0.3s ease;
 }
 
-.tasks {
-  margin-top: var(--spacing-medium);
+.column h3 {
+  font-size: 1.4rem;
+  color: var(--text-heading);
+  margin-bottom: var(--spacing-medium);
+  text-align: center;
 }
 
+/* Task Card */
 .task {
-  background-color: var(--background-card);
-  padding: var(--spacing-small);
-  margin-bottom: var(--spacing-small);
+  background-color: var(--background-secondary);
   border-radius: var(--border-radius);
+  padding: var(--spacing-small);
   box-shadow: var(--shadow-small);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: var(--spacing-small);
 }
 
-.task h3 {
-  margin: 0;
-}
-
-.task button {
-  margin-top: var(--spacing-small);
-  margin-right: var(--spacing-small);
+.task:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
 }
