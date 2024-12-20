@@ -19,7 +19,9 @@ function loadPage(page) {
       if (page === "task.html") {
         initializeTaskPage()
       }
-
+      if (page === "task-tracker.html") {
+        fetchTasks()
+      }
       // Save the current page to localStorage
       localStorage.setItem("currentPage", page)
     })
@@ -36,12 +38,6 @@ document.querySelectorAll(".nav-link").forEach((link) => {
     const page = link.getAttribute("data-page")
     loadPage(page) // This will work now because loadPage is defined above
   })
-})
-
-// Load the last visited page or default to task.html
-window.addEventListener("DOMContentLoaded", () => {
-  const lastPage = localStorage.getItem("currentPage") || "task.html"
-  loadPage(lastPage)
 })
 
 // Task Management Functions (your existing task-related functions)
@@ -248,10 +244,6 @@ function formatDate(dateString) {
 }
 
 // Fetch tasks from the backend
-document.addEventListener("DOMContentLoaded", function () {
-  fetchTasks()
-})
-
 function fetchTasks() {
   fetch("https://b41-web-003-web-wizards.onrender.com/api/tasks/", {
     method: "GET",
@@ -267,49 +259,114 @@ function fetchTasks() {
 }
 
 function renderTasks(tasks) {
-    const todoContainer = document.getElementById("todo-tasks");
-    const inProgressContainer = document.getElementById("in-progress-tasks");
-    const doneContainer = document.getElementById("done-tasks");
-  
-    tasks.forEach((task) => {
-      const taskElement = document.createElement("div");
-      taskElement.classList.add("task");
-      taskElement.textContent = task.title; // Task title
-  
-      // Add task details inside the task card
-      const taskDetails = document.createElement("div");
-      taskDetails.classList.add("task-details");
-      taskDetails.textContent = task.description || "No description provided";
-      taskElement.appendChild(taskDetails);
-  
-      // Add priority label
-      const taskPriority = document.createElement("div");
-      taskPriority.classList.add("task-priority");
-      taskPriority.textContent = `Priority: ${task.priority}`;
-      taskElement.appendChild(taskPriority);
-  
-      taskElement.draggable = true;
-      taskElement.setAttribute("data-id", task.id);
-  
-      // Add drag event listeners
-      taskElement.addEventListener("dragstart", dragStart);
-      taskElement.addEventListener("dragend", dragEnd);
-  
-      // Append task to appropriate container based on priority
-      switch (task.priority) {
-        case "low":
-          todoContainer.appendChild(taskElement);
-          break;
-        case "medium":
-          inProgressContainer.appendChild(taskElement);
-          break;
-        case "high":
-          doneContainer.appendChild(taskElement);
-          break;
-      }
-    });
-  }
-  
+  const todoContainer = document.getElementById("todo-tasks")
+  const inProgressContainer = document.getElementById("in-progress-tasks")
+  const doneContainer = document.getElementById("done-tasks")
+
+  tasks.forEach((task) => {
+    const taskElement = document.createElement("div")
+    taskElement.style.cssText = `
+      background-color: #2d2d2d;
+      color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      transition: background-color 0.3s;
+    `
+    taskElement.onmouseover = () => taskElement.style.backgroundColor = "#3a3a3a"
+    taskElement.onmouseout = () => taskElement.style.backgroundColor = "#2d2d2d"
+    
+    // Task Title
+    const taskTitle = document.createElement("h3")
+    taskTitle.style.cssText = `
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #f0f0f0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    `
+    taskTitle.textContent = task.title
+    taskElement.appendChild(taskTitle)
+    
+    // Add task details inside the task card
+    const taskDetails = document.createElement("div")
+    taskDetails.style.cssText = `
+      color: #a0a0a0;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    `
+    taskDetails.textContent = task.description || "No description provided"
+    taskElement.appendChild(taskDetails)
+    
+    // Add priority label with button
+    const taskPriorityContainer = document.createElement("div")
+    taskPriorityContainer.style.cssText = `
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    `
+    
+    const priorityButton = document.createElement("button")
+    priorityButton.style.cssText = `
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: default;
+    `
+    
+    // Dynamically change button color based on priority
+    if (task.priority === "high") {
+      priorityButton.style.backgroundColor = "#f44336" // Red
+    } else if (task.priority === "medium") {
+      priorityButton.style.backgroundColor = "#ff9800" // Yellow
+    } else {
+      priorityButton.style.backgroundColor = "#4caf50" // Green
+    }
+    
+    priorityButton.textContent = task.priority
+    taskPriorityContainer.appendChild(priorityButton)
+    taskElement.appendChild(taskPriorityContainer)
+    
+    // Append the task element to the appropriate container
+    if (task.status === "todo") {
+      todoContainer.appendChild(taskElement)
+    } else if (task.status === "in-progress") {
+      inProgressContainer.appendChild(taskElement)
+    } else if (task.status === "done") {
+      doneContainer.appendChild(taskElement)
+    }
+    
+
+    taskElement.draggable = true
+    taskElement.setAttribute("data-id", task._id)
+
+    // Add drag event listeners
+    taskElement.addEventListener("dragstart", dragStart)
+    taskElement.addEventListener("dragend", dragEnd)
+
+    // Append task to appropriate container based on priority
+    switch (task.status.toLowerCase()) {
+      case "todo":
+        todoContainer.appendChild(taskElement)
+        break
+      case "pending":
+        inProgressContainer.appendChild(taskElement)
+        break
+      case "done":
+        doneContainer.appendChild(taskElement)
+        break
+    }
+  })
+}
 
 function allowDrop(event) {
   event.preventDefault()
@@ -338,9 +395,9 @@ function dragEnd(event) {
 
 function updateTaskStatus(taskId, newStatus) {
   const statusMapping = {
-    todo: "To Do",
-    inProgress: "In Progress",
-    done: "Done",
+    todo: "todo",
+    "in-progress": "pending",
+    done: "done",
   }
 
   const newStatusName = statusMapping[newStatus]
@@ -361,3 +418,10 @@ function updateTaskStatus(taskId, newStatus) {
     .then((data) => console.log("Task status updated:", data))
     .catch((error) => console.error("Error updating task:", error))
 }
+
+// Load the last visited page or default to task.html
+window.addEventListener("DOMContentLoaded", () => {
+  const lastPage = localStorage.getItem("currentPage") || "task.html"
+  loadPage(lastPage)
+  // fetchTasks()
+})
