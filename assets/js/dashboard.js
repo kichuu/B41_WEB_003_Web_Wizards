@@ -3,7 +3,7 @@ const username = document.getElementById("username");
 const contentContainer = document.getElementById("content");
 const token = localStorage.getItem("token");
 console.log(token)
-if(!token){
+if (!token) {
     window.location.href = "./login.html"
 }
 // Function to load a page dynamically
