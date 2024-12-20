@@ -28,7 +28,7 @@ A task management application built with HTML, CSS, and JavaScript that helps us
 
 1. Clone the repository
 
-git clone https://github.com/yourusername/task-master.git
+git clone https://github.com/kichuu/B41_WEB_003_Web_Wizards.git
 
 2. Open the project folder and launch index.html in your web browser
 
@@ -107,7 +107,7 @@ A simple task management system built using Node.js, Express, MongoDB, and JWT a
 ### **User Routes**
 
 #### **Register a User**
-- **POST** `/api/auth/register`
+- **POST** `/api/users/register`
 - **Request Body:**
   ```json
   {
@@ -118,7 +118,7 @@ A simple task management system built using Node.js, Express, MongoDB, and JWT a
   ```
 
 #### **Login a User**
-- **POST** `/api/auth/login`
+- **POST** `/api/users/login`
 - **Request Body:**
   ```json
   {

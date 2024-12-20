@@ -7,8 +7,7 @@ const router = express.Router();
 
 // Create Task
 router.post("/", protect, async (req, res) => {
-  const { title, description, status, priority, project, assignedTo } = req.body;
-
+  const { title, description, status, priority, project, assignedTo , dueDate } = req.body;
   try {
     // Create the task
     const task = await Task.create({
@@ -17,6 +16,7 @@ router.post("/", protect, async (req, res) => {
       status,
       priority,
       project,
+      dueDate,
       assignedTo,
       createdBy: req.user.id,
     });
@@ -38,10 +38,10 @@ router.get("/", protect, async (req, res) => {
     let tasks;
     if (projectId) {
       // Fetch tasks only for a specific project
-      tasks = await Task.find({ assignedTo: req.user.id, project: projectId });
+      tasks = await Task.find({ project: projectId });
     } else {
       // Fetch all tasks for the user
-      tasks = await Task.find({ assignedTo  : req.user.id });
+      tasks = await Task.find();
     }
 
     res.status(200).json(tasks);
