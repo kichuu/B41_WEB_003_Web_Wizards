@@ -1,4 +1,5 @@
 console.log("etst")
+const BASE_URL = "https://b41web003webwizards-production-bc76.up.railway.app"
 document
   .getElementById("signupForm")
   .addEventListener("submit", async function (e) {
@@ -21,7 +22,7 @@ document
 
     try {
       // Send signup request to backend
-      const response = await fetch("https://b41-web-003-web-wizards.onrender.com/api/users/register/", {
+      const response = await fetch(`${BASE_URL}/api/users/register/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
