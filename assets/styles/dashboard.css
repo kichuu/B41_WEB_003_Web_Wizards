@@ -115,16 +115,13 @@ body {
 
 /* Make sure the active link has the indicator */
 .functionality a.active::after {
-  background-color: var(--secondary-color); /* Active bar color (bright red) */
-  width: 6px; /* Active bar width */
+  background-color: var(--secondary-color);
+  width: 6px;
 }
 
-/* Optional: Highlight active link color */
 .functionality a.active {
-  background-color: var(
-    --primary-color
-  ); /* Highlight background color for active link */
-  color: var(--background-main); /* Change text color when active */
+  background-color: var(--primary-color);
+  color: var(--background-main);
 }
 
 .logout-button {
