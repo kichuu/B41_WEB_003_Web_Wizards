@@ -9,50 +9,57 @@
 body {
   background-color: var(--background-main);
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   font-family: var(--font-primary);
+  overflow-x: hidden;
 }
 
 /* Main container with flex layout and spacing */
-.container {
+.dashboard-container {
   width: 100%;
   height: 100vh;
-  padding: 2.5rem;
+  padding: clamp(1rem, 2.5vw, 2.5rem);
   display: flex;
-  gap: 2.5rem;
+  gap: clamp(1rem, 2.5vw, 2.5rem);
+  flex-direction: row;
+  flex-wrap: nowrap; /* Avoid wrapping horizontally */
+  overflow-x: hidden; /* Hide horizontal overflow */
 }
 
 /* Left sidebar styling with elegant design */
 .left-sidebar {
-  width: 22%;
-  height: 90vh;
+  width: min(100%, 350px);
+  min-height: 80vh;
   background-color: var(--background-secondary);
   border-radius: 1.5rem;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  flex-grow: 1;
 }
 
 .left {
-  height: 80vh;
+  height: auto;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
+  padding: clamp(1rem, 1.5vw, 1.5rem);
 }
 
 .profile {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.4rem;
+  gap: clamp(0.8rem, 1.4vw, 1.4rem);
   color: var(--text-primary);
-  padding: 1.5rem;
+  padding: clamp(1rem, 1.5vw, 1.5rem);
   transition: all 0.3s ease;
+  flex-wrap: wrap;
 }
 
 .profile i {
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 2.2vw, 2.2rem);
 }
 
 .profile:hover {
@@ -65,11 +72,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1.2rem;
+  gap: clamp(0.8rem, 1.2vw, 1.2rem);
 }
 
 .functionality a {
-  padding: 1rem;
+  padding: clamp(0.8rem, 1vw, 1rem);
   background-color: var(--background-main);
   width: 90%;
   text-decoration: none;
@@ -79,23 +86,56 @@ body {
   transition: all 0.3s ease;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  position: relative; /* Position to allow pseudo-element inside */
+  display: flex; /* Use flexbox for alignment */
+  justify-content: center; /* Center text inside the link */
 }
 
-.functionality a:hover {
-  transform: translateX(5px);
-  background-color: var(--primary-color);
-  color: var(--background-main);
+/* Adding the vertical bar indicator inside the link */
+.functionality a::after {
+  content: "";
+  position: absolute;
+  left: 0; /* Align the bar to the left of the link */
+  top: 0;
+  bottom: 0;
+  width: 4px; /* Default width */
+  background-color: transparent; /* Initially invisible */
+  transition: background-color 0.3s ease, width 0.3s ease; /* Smooth transition */
+  border-radius: 0.8rem 0 0 0.8rem; /* Rounded corners on the left side */
+}
+
+/* On hover, expand the vertical bar and change color */
+.functionality a:hover::after {
+  background-color: var(
+    --secondary-color
+  ); /* Vibrant color on hover (example: bright red) */
+  width: 6px; /* Slightly expand the bar on hover */
+}
+
+/* Make sure the active link has the indicator */
+.functionality a.active::after {
+  background-color: var(--secondary-color); /* Active bar color (bright red) */
+  width: 6px; /* Active bar width */
+}
+
+/* Optional: Highlight active link color */
+.functionality a.active {
+  background-color: var(
+    --primary-color
+  ); /* Highlight background color for active link */
+  color: var(--background-main); /* Change text color when active */
 }
 
 .logout-button {
   width: 90%;
-  padding: 1.2rem;
+  padding: clamp(1rem, 1.2vw, 1.2rem);
   background: none;
   color: var(--text-primary);
   outline: none;
   border: none;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
   transition: all 0.3s ease;
   border-radius: 0.8rem;
 }
@@ -107,14 +147,16 @@ body {
 
 /* Right container styling with modern design */
 .right-container {
-  width: 78%;
-  height: 90vh;
+  width: min(100%, calc(100% - 350px - 2.5rem));
+  height: auto;
+  max-height: 90vh;
   background-color: var(--background-secondary);
   border-radius: 1.5rem;
   overflow-y: auto;
-  padding: 2.5rem;
+  padding: clamp(1.5rem, 2.5vw, 2.5rem);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+  flex-grow: 1;
 }
 
 .right-container::-webkit-scrollbar {
@@ -133,7 +175,7 @@ body {
 
 .right h1 {
   color: var(--text-primary);
-  font-size: 2.2rem;
+  font-size: clamp(1.8rem, 2.2vw, 2.2rem);
   margin-bottom: 1rem;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -141,7 +183,80 @@ body {
 
 .right p {
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 1.1vw, 1.1rem);
   line-height: 1.6;
   opacity: 0.9;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 1024px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .left-sidebar,
+  .right-container {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .left {
+    min-height: auto;
+    gap: 2rem;
+  }
+
+  .functionality {
+    margin: 2rem 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .functionality a {
+    width: 100%;
+  }
+
+  .logout-button {
+    width: 100%;
+  }
+
+  .right h1 {
+    font-size: clamp(1.6rem, 2vw, 1.8rem);
+  }
+
+  .right p {
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  }
+
+  /* Ensure task board is responsive */
+  #task-board {
+    grid-template-columns: 1fr; /* Stack task columns */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .functionality a {
+    width: 100%;
+  }
+
+  .logout-button {
+    width: 100%;
+  }
+
+  .right h1 {
+    font-size: clamp(1.4rem, 2vw, 1.6rem);
+  }
+
+  .right p {
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+  }
 }
