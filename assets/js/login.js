@@ -1,3 +1,4 @@
+const BASE_URL = 'https://b41web003webwizards-production-bc76.up.railway.app'
 
 // document.querySelector("form").addEventListener("submit", (e) => {
 //     e.preventDefault();
@@ -17,7 +18,7 @@
   try {
     // Send Login Request to Deployed or localHost Backend
     const response = await fetch(
-      "https://b41-web-003-web-wizards.onrender.com/api/users/login/",
+      `${BASE_URL}/api/users/login/`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
