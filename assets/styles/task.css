@@ -134,14 +134,14 @@ body {
   cursor: pointer;
   color: var(--primary-color);
   padding: 0.5rem;
-  font-size: 1.2rem; /* Adjust size for visibility */
+  font-size: 1.2rem;
   transition: transform 0.2s ease-in-out;
 }
 
 .edit-btn:hover,
 .delete-btn:hover {
-  transform: scale(1.1); /* Add hover effect for interactivity */
-  color: #1e90ff; /* Optional hover color (blue) */
+  transform: scale(1.1);
+  color: #1e90ff;
 }
 
 /* Add New Task Card */
