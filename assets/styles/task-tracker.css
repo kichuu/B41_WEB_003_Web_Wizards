@@ -1,12 +1,17 @@
 /* Task Board */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #task-board {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-medium);
   padding: var(--spacing-large);
 }
 
-/* Task Column */
 .column {
   background-color: var(--background-main);
   border-radius: var(--border-radius);
@@ -25,7 +30,6 @@
   text-align: center;
 }
 
-/* Task Card */
 .task {
   background-color: var(--background-secondary);
   border-radius: var(--border-radius);
@@ -38,4 +42,27 @@
 .task:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-medium);
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 1024px) {
+  #task-board {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on tablets */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #task-board {
+    grid-template-columns: 1fr; /* Stack columns for smaller screens */
+  }
+
+  .column {
+    min-height: 300px; /* Adjust height for smaller screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .column {
+    min-height: 250px; /* Further adjustment for smaller screens */
+  }
 }

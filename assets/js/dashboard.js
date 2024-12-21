@@ -1,4 +1,5 @@
-// Select the container where content will be loaded\
+// Select the container where content will be loaded
+const BASE_URL = 'https://b41web003webwizards-production-bc76.up.railway.app'
 const username = document.getElementById("username")
 const contentContainer = document.getElementById("content")
 const token = localStorage.getItem("token")
@@ -103,7 +104,7 @@ function handleTaskSubmit(e, modal, form, taskGrid) {
   }
 
   // Send the task to the backend
-  fetch("https://b41-web-003-web-wizards.onrender.com/api/tasks/", {
+  fetch(`${BASE_URL}/api/tasks/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -153,7 +154,7 @@ function loadTasks(taskGrid) {
   }
 
   // Fetch tasks from the API
-  fetch("https://b41-web-003-web-wizards.onrender.com/api/tasks/", {
+  fetch(`${BASE_URL}/api/tasks/`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming you use JWT
@@ -189,9 +190,8 @@ function addTaskToGrid(task, taskGrid) {
         <p>${task.description}</p>
         <div class="task-footer">
             <span>${formatDate(task.dueDate)}</span>
-            <span class="priority">${
-              task.priority
-            }</span> <!-- Display priority instead of status -->
+            <span class="priority">${task.priority
+    }</span> <!-- Display priority instead of status -->
         </div>
     `
 
@@ -214,7 +214,7 @@ function addTaskToGrid(task, taskGrid) {
 
 function deleteTask(id, taskGrid) {
   // Send a DELETE request to the backend
-  fetch(`https://b41-web-003-web-wizards.onrender.com/api/tasks/${id}`, {
+  fetch(`${BASE_URL}/api/tasks/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming you use JWT
@@ -245,7 +245,7 @@ function formatDate(dateString) {
 
 // Fetch tasks from the backend
 function fetchTasks() {
-  fetch("https://b41-web-003-web-wizards.onrender.com/api/tasks/", {
+  fetch(`${BASE_URL}/api/tasks/`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -276,7 +276,7 @@ function renderTasks(tasks) {
     `
     taskElement.onmouseover = () => taskElement.style.backgroundColor = "#3a3a3a"
     taskElement.onmouseout = () => taskElement.style.backgroundColor = "#2d2d2d"
-    
+
     // Task Title
     const taskTitle = document.createElement("h3")
     taskTitle.style.cssText = `
@@ -289,7 +289,7 @@ function renderTasks(tasks) {
     `
     taskTitle.textContent = task.title
     taskElement.appendChild(taskTitle)
-    
+
     // Add task details inside the task card
     const taskDetails = document.createElement("div")
     taskDetails.style.cssText = `
@@ -303,7 +303,7 @@ function renderTasks(tasks) {
     `
     taskDetails.textContent = task.description || "No description provided"
     taskElement.appendChild(taskDetails)
-    
+
     // Add priority label with button
     const taskPriorityContainer = document.createElement("div")
     taskPriorityContainer.style.cssText = `
@@ -312,7 +312,7 @@ function renderTasks(tasks) {
       align-items: center;
       gap: 0.5rem;
     `
-    
+
     const priorityButton = document.createElement("button")
     priorityButton.style.cssText = `
       padding: 0.25rem 0.75rem;
@@ -322,7 +322,7 @@ function renderTasks(tasks) {
       font-weight: 600;
       cursor: default;
     `
-    
+
     // Dynamically change button color based on priority
     if (task.priority === "high") {
       priorityButton.style.backgroundColor = "#f44336" // Red
@@ -331,11 +331,11 @@ function renderTasks(tasks) {
     } else {
       priorityButton.style.backgroundColor = "#4caf50" // Green
     }
-    
+
     priorityButton.textContent = task.priority
     taskPriorityContainer.appendChild(priorityButton)
     taskElement.appendChild(taskPriorityContainer)
-    
+
     // Append the task element to the appropriate container
     if (task.status === "todo") {
       todoContainer.appendChild(taskElement)
@@ -344,7 +344,7 @@ function renderTasks(tasks) {
     } else if (task.status === "done") {
       doneContainer.appendChild(taskElement)
     }
-    
+
 
     taskElement.draggable = true
     taskElement.setAttribute("data-id", task._id)
@@ -406,7 +406,7 @@ function updateTaskStatus(taskId, newStatus) {
     status: newStatusName,
   }
 
-  fetch(`https://b41-web-003-web-wizards.onrender.com/api/tasks/${taskId}`, {
+  fetch(`${BASE_URL}/api/tasks/${taskId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -425,13 +425,30 @@ window.addEventListener("DOMContentLoaded", () => {
   loadPage(lastPage)
   const logoutButton = document.querySelector('.logout-button');
 
-// Add click event listener to the logout button
-logoutButton.addEventListener('click', () => {
-  // Remove the token from localStorage
-  localStorage.removeItem('token');
+  // Add click event listener to the logout button
+  logoutButton.addEventListener('click', () => {
+    // Remove the token from localStorage
+    localStorage.removeItem('token');
 
-  // Optionally, redirect to the login page
-  window.location.href = 'login.html'; // Change to your login page URL
-});
+    // Optionally, redirect to the login page
+    window.location.href = 'login.html'; // Change to your login page URL
+  });
   // fetchTasks()
 })
+
+
+
+// Get all navigation links
+const navLinks = document.querySelectorAll('.functionality a');
+
+// Add event listener for each link to toggle active state
+navLinks.forEach(link => {
+  link.addEventListener('click', function () {
+    // Remove the 'active' class from all links
+    navLinks.forEach(link => link.classList.remove('active'));
+
+    // Add the 'active' class to the clicked link
+    this.classList.add('active');
+  });
+});
+
