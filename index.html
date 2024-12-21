@@ -1,20 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task Management System</title>
-    <!-- Root Styles -->
-    <link rel="stylesheet" href="./assets/styles/root.css" />
-    <!-- Index Styles -->
-    <link rel="stylesheet" href="./assets/styles/common.css" />
-  </head>
-  <body>
-    <div class="container">
-      <!-- Main Heading Section -->
-      <div class="main-heading">
-        <h1>Welcome to Task Management</h1>
-        <p>Streamline your workflow and stay organized with ease.</p>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskManager - Time Management System</title>
+  <script src="https://kit.fontawesome.com/744e7ecd29.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./assets/styles/root.css">
+  <link rel="stylesheet" href="./assets/styles/common.css">
+</head>
+
+<body>
+  <!-- Loader -->
+  <div class="loader-wrapper">
+    <div class="loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar-logo">
+      <img src="./assets/images/logo.gif" alt="Task Manager Logo" class="logo-img">
+      <span class="logo-text">TASK MANAGER</span>
+    </div>
+    <nav>
+      <ul class="navbar-links">
+        <li><a href="./pages/login.html">Login</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Landing Section -->
+  <div class="landing-container">
+    <main>
+      <h1>Welcome to TaskManager</h1>
+      <p>A powerful tool designed to streamline your workflow and boost productivity.</p>
+      <a href="/pages/login.html" class="get-started-btn">
+        Get Started <i class="fa-solid fa-paper-plane"></i>
+      </a>
+    </main>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="feature-box">
+        <h3>Organize Tasks</h3>
+        <p>Stay on top of your responsibilities with intuitive task organization features.</p>
       </div>
 
       <!-- Links Section -->
