@@ -36,15 +36,6 @@ git clone https://github.com/kichuu/B41_WEB_003_Web_Wizards.git
 
 3. Access the application directly through your web browser
 
-## API Endpoints
-
-- `GET /tasks` - Get all tasks
-- `GET /tasks/{id}` - Get task by ID
-- `POST /tasks` - Create new task
-- `PUT /tasks/{id}` - Update existing task
-- `DELETE /tasks/{id}` - Delete task
-- `GET /users` - Get all users
-- `POST /users` - Create new user
 
 ## Testing
 
