@@ -1,4 +1,5 @@
 // Select the container where content will be loaded
+const BASE_URL = 'https://b41web003webwizards-production-bc76.up.railway.app'
 const username = document.getElementById("username")
 const contentContainer = document.getElementById("content")
 const token = localStorage.getItem("token")
@@ -103,7 +104,7 @@ function handleTaskSubmit(e, modal, form, taskGrid) {
   }
 
   // Send the task to the backend
-  fetch("https://b41-web-003-web-wizards.onrender.com/api/tasks/", {
+  fetch(`${BASE_URL}/api/tasks/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -153,7 +154,7 @@ function loadTasks(taskGrid) {
   }
 
   // Fetch tasks from the API
-  fetch("https://b41-web-003-web-wizards.onrender.com/api/tasks/", {
+  fetch(`${BASE_URL}/api/tasks/`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming you use JWT
@@ -213,7 +214,7 @@ function addTaskToGrid(task, taskGrid) {
 
 function deleteTask(id, taskGrid) {
   // Send a DELETE request to the backend
-  fetch(`https://b41-web-003-web-wizards.onrender.com/api/tasks/${id}`, {
+  fetch(`${BASE_URL}/api/tasks/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming you use JWT
@@ -244,7 +245,7 @@ function formatDate(dateString) {
 
 // Fetch tasks from the backend
 function fetchTasks() {
-  fetch("https://b41-web-003-web-wizards.onrender.com/api/tasks/", {
+  fetch(`${BASE_URL}/api/tasks/`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -405,7 +406,7 @@ function updateTaskStatus(taskId, newStatus) {
     status: newStatusName,
   }
 
-  fetch(`https://b41-web-003-web-wizards.onrender.com/api/tasks/${taskId}`, {
+  fetch(`${BASE_URL}/api/tasks/${taskId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
