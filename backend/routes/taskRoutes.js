@@ -39,10 +39,10 @@ router.get("/", protect, async (req, res) => {
     let tasks
     if (projectId) {
       // Fetch tasks only for a specific project
-      tasks = await Task.find({ user: req.user.id, project: projectId })
+      tasks = await Task.find({ createdBy: req.user.id, project: projectId })
     } else {
       // Fetch all tasks for the user
-      tasks = await Task.find({ user: req.user.id })
+      tasks = await Task.find({ createdBy: req.user.id })
     }
 
     res.status(200).json(tasks)
